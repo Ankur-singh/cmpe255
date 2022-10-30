@@ -1,0 +1,34 @@
+.DEFAULT_GOAL := all
+
+all: clean	regression	classification	regression_intel	classification_intel
+
+standard: regression	classification
+
+intel : regression_intel	classification_intel
+
+regression_intel:
+	echo "Running Regression benchmark (Intel Optimization - True)"
+	python -m sklearnex benchmark.py --problem regression --dataset boston --prefix intel
+	python -m sklearnex benchmark.py --problem regression --dataset diabetes --prefix intel
+	python -m sklearnex benchmark.py --problem regression --dataset artificial --prefix intel --dims 4800 5000 --save reg_art_5kx50k.csv
+
+classification_intel:
+	echo "Running Classification benchmark (Intel Optimization - True)"
+	python -m sklearnex benchmark.py --problem classification --dataset breast_cancer --prefix intel
+	python -m sklearnex benchmark.py --problem classification --dataset artificial --prefix intel --dims 4800 5000 --save cls_art_5kx50k.csv
+
+regression:
+	echo "Running Regression benchmark (Intel Optimization - False)"
+	python benchmark.py --problem regression --dataset boston --prefix py39
+	python benchmark.py --problem regression --dataset diabetes --prefix py39
+	python benchmark.py --problem regression --dataset artificial --prefix py39 --dims 4800 50000 --save reg_art_5kx50k.csv
+
+classification:
+	echo "Running Classification benchmark (Intel Optimization - False)"
+	python benchmark.py --problem classification --dataset breast_cancer --prefix py39
+	python benchmark.py --problem classification --dataset artificial --prefix py39 --dims 4800 50000 --save cls_art_5kx50k.csv
+
+clean:
+	echo "Cleaning up..."
+	rm -r results
+	mkdir results
