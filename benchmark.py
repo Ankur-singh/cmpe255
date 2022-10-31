@@ -13,7 +13,7 @@ def get_objects(args):
         if args['dataset'] == 'breast_cancer': 
             data = load_breast_cancer()
         elif args['dataset'] == 'artificial':
-            data = make_classification(n_samples=args['dims'][0], n_features=args['dims'][1], n_informative=args['dims'][1])
+            data = make_classification(n_samples=args['dims'][0], n_features=args['dims'][1])
         else:
             raise ValueError('Invalid dataset name')
 
