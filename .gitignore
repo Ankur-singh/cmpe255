@@ -1,5 +1,14 @@
-/__pycache__
-/homework2.py
-/images
-/models.ipynb
-/plots.ipynb
+*/__pycache__
+
+Homework 1/homework2.py
+Homework 1/images
+Homework 1/models.ipynb
+Homework 1/plots.ipynb
+Bonuswork 1/TODO.md
+Bonuswork 1/model_weights/model_onnx.onnx
+Bonuswork 1/model_weights/model_scripted_cpu.pt
+Bonuswork 1/model_weights/model_scripted_gpu.pt
+Bonuswork 1/model_weights/openvino/model_onnx.bin
+Bonuswork 1/model_weights/openvino/model_onnx.mapping
+Bonuswork 1/model_weights/openvino/model_onnx.xml
+Bonuswork 1/nbs/01_export.ipynb

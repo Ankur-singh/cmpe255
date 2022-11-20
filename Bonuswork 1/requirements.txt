@@ -1,0 +1,35 @@
+openvino-dev[onnx,tensorflow2]==2022.2.0
+gdown
+pytube>=12.1.0
+yaspin
+librosa==0.8.1
+ipywidgets
+gradio
+
+# Upgrade onnx version to avoid 220 YOLOV5 pytorch to onnx model export issue on Windows
+onnx>=1.11.0,<1.12.0
+pytorch==1.13.0
+torchvision==0.14.0
+torchmetrics==0.6.2
+
+# Jupyter requirements
+jupyterlab
+
+# The packages below are not directly required. They are dependencies of 
+# other dependencies that are pinned to a specific version to avoid
+# compatibility issues or vulnerabilities
+seaborn>=0.11.0
+geffnet==0.9.8
+matplotlib<3.4
+jedi==0.17.2
+setuptools>=56.0.0
+Pillow>=8.3.2
+numpy<=1.23.1
+ipykernel==5.*
+ipython==7.16.3 # not directly required, pinned to avoid a vulnerability
+pygments>=2.7.4 # not directly required, pinned by Snyk to avoid a vulnerability
+nltk>=3.6.4 # not directly required, pinned by Snyk to avoid a vulnerability
+rsa>=4.7 # not directly required, pinned by Snyk to avoid a vulnerability
+scikit-learn>=0.24.2 # not directly required, pinned by Snyk to avoid a vulnerability
+nest-asyncio<=1.5.4
+jupyter-client<=7.2.0
