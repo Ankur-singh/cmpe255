@@ -5,7 +5,7 @@
 1. Git clone this repo
 
 ```bash
-git clone
+git clone https://github.com/Ankur-singh/cmpe255.git
 ```
 
 2. Create new conda environment and activate it
@@ -72,36 +72,28 @@ To train only one class of models, run the following command. Possible model cla
 make -f Makefile <model_class>
 ```
 
+Here is a screenshot showing the output of the above command:
+
+![](./images/training1.png)
+
+
 ## Results:
 
 Here are all the details collected during the training process. W&B dashboard can be found [here](https://wandb.ai/ankursingh/255_final_project).
 
+![](./images/summary_table.png)
 
-| Model                           | Train Loss | Valid Loss | Runtime | Model Size | Params    | Flops    |
-| ------------------------------- | ----------:| ----------:| -------:| ----------:| ---------:| --------:|
-| MAnet\_resnext50\_32x4d         | 0.583      | 0.625      | 10m 58s | 560.745 MB | 146.917 M | 19.177 G |
-| MAnet\_mit\_b2                  | 0.545      | 0.588      | 8m 26s  | 133.443 MB | 34.977 M  | 7.582 G  |
-| MAnet\_timm-efficientnet-b5     | 0.723      | 0.7323     | 10m 24s | 146.462 MB | 37.164 M  | 6.480 G  |
-| MAnet\_resnet50                 | 0.6075     | 0.6348     | 9m 10s  | 562.702 MB | 147.445 M | 18.975 G |
-| PSPNet\_resnext50\_32x4d        | 0.6011     | 0.6744     | 6m 13s  | 91.552 MB* | 2.362 M   | 3.194 G  |
-| PSPNet\_mit\_b2                 | 0.6333     | 0.6424     | 6m 55s  | 93.489 MB  | 24.506 M  | 4.433 G  |
-| PSPNet\_timm-efficientnet-b5    | 0.8233     | 0.8041     | 6m 41s  | 109.661 MB | 0.6912 M* | 1.150 G* |
-| PSPNet\_resnet50                | 0.6384     | 0.691      | 6m 05s* | 93.509 MB  | 2.395 M   | 3.150 G  |
-| FPN\_resnet50\_32x4d            | 0.623      | 0.6522     | 7m 50s  | 97.888 MB  | 25.590 M  | 8.089 G  |
-| FPN\_timm-efficientnet-b5       | 0.7048     | 0.7219     | 9m 43s  | 115.760 MB | 29.118 M  | 5.200 G  |
-| FPN\_resnet50                   | 0.6209     | 0.6576     | 26m 15s | 99.845 MB  | 26.119 M  | 7.887 G  |
-| UnetPlusPlus\_resnext50\_32x4d  | 0.4779*    | 0.5307*    | 12m 31s | 185.157 MB | 48.463 M  | 58.084 G |
-| UnetPlusPlus\_timm-efficient-b5 | 0.6652     | 0.6769     | 11m 30s | 122.418 MB | 30.862 M  | 11.781 G |
-| UnetPlusPlus\_resnet50          | 0.4832     | 0.5404     | 10m 46s | 187.114 MB | 48.991 M  | 57.882 G |
-| Unet\_resnext50\_32x4d          | 0.567      | 0.6115     | 8m 37s  | 122.331 MB | 31.998 M  | 11.229 G |
-| Unet\_mit\_b2                   | 0.5218     | 0.5764     | 8m 03s  | 104.843 MB | 27.482 M  | 7.208 G  |
-| Unet\_timm-efficientnet-b5      | 0.694      | 0.7165     | 9m 52s  | 119.766 MB | 30.168 M  | 6.245 G  |
-| Unet\_resnet50                  | 0.5822     | 0.6122     | 6m 59s  | 124.288 MB | 32.526 M  | 11.028 G |
 
+You can find the [Spreadsheet here](https://docs.google.com/spreadsheets/d/15Bf3LZAG-UKH4k6CDSzhXIzEU7hqz4HiP6lrVv89Ri0/edit?usp=sharing), if you want to use the table interactively.
 
 Here are some insights from the table
 
-- 
+- Generally speaking, `UnetPlusPlus` and `UNet` architecture, with any backbone, perform the best in term of `Valid Loss`. On the other hand, `PSPNet` performs the worst.
+- Even though `PSPNet` is worst in terms of `Valid Loss` it is the best architecture in terms of all other metrics (i.e. `Runtime`, `Model Size`, `Params`, and `FLOPs`). 
+- `MAnet` performs well with different backbones but is quite expensive in terms of `Model Size`, and `Params`.
+- You will see low `Valid Loss` if you use `resnext50_32x4d` or `resnet50` as backbone when compared to other backbones. But these models are very expensive in terms of compute, model size, and training time.
+- `timm-efficientnet-b5` backbone leads to significant lower number of flops but tends to perform poorly (in terms of valid loss).
+- Both `MAnet_mit_b2` and `Unet_mit_b2` are very similar in almost every aspect. These two architecture with `mit_b2` backbone looks like a good balance between performance, compute requirement, and model size.
 
 
 ## Fastai + SMP
