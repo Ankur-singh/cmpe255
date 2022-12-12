@@ -1,0 +1,36 @@
+.DEFAULT_GOAL := all
+
+all: unet    unetpp    fpn    pspnet    manet
+
+unet:
+	echo "Training UNet models"
+	python train.py arch=smp.Unet encoder=resnet50
+	python train.py arch=smp.Unet encoder=timm-efficientnet-b5
+	python train.py arch=smp.Unet encoder=mit_b2
+	python train.py arch=smp.Unet encoder=resnext50_32x4d
+    
+unetpp:
+	echo "Training UNet++ models"
+	python train.py arch=smp.UnetPlusPlus encoder=resnet50
+	python train.py arch=smp.UnetPlusPlus encoder=timm-efficientnet-b5
+	python train.py arch=smp.UnetPlusPlus encoder=resnext50_32x4d
+
+fpn:
+	echo "Training FPN models"
+	python train.py arch=smp.FPN encoder=resnet50
+	python train.py arch=smp.FPN encoder=timm-efficientnet-b5
+	python train.py arch=smp.FPN encoder=resnext50_32x4d
+    
+pspnet:
+	echo "Training PSPNet models"
+	python train.py arch=smp.PSPNet encoder=resnet50
+	python train.py arch=smp.PSPNet encoder=timm-efficientnet-b5
+	python train.py arch=smp.PSPNet encoder=mit_b2
+	python train.py arch=smp.PSPNet encoder=resnext50_32x4d
+    
+manet:
+	echo "Training MANet models"
+	python train.py arch=smp.MAnet encoder=resnet50
+	python train.py arch=smp.MAnet encoder=timm-efficientnet-b5
+	python train.py arch=smp.MAnet encoder=mit_b2
+	python train.py arch=smp.MAnet encoder=resnext50_32x4d
